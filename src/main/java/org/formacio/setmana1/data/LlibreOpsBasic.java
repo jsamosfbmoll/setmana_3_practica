@@ -35,7 +35,6 @@ public class LlibreOpsBasic {
 	 * Sense sorpreses: dona d'alta un nou llibre amb les propietats especificaques
 	 */
 	public void alta (String isbn, String autor, Integer pagines, Recomanacio recomanacio, String titol) {
-		
 		Llibre libro = new Llibre();
 		libro.setIsbn(isbn);
 		libro.setAutor(autor);
@@ -43,7 +42,6 @@ public class LlibreOpsBasic {
 		libro.setRecomanacio(recomanacio);
 		libro.setTitol(titol);
 		em.persist(libro);
-		
 	}
 	
 	/**
@@ -52,6 +50,12 @@ public class LlibreOpsBasic {
 	 * @return true si s'ha esborrat el llibre, false si no existia
 	 */
 	public boolean elimina (String isbn) {
+		Llibre libro = null;
+		try {
+			libro = this.carrega(isbn);
+			em.remove(libro);
+		}
+		catch (Exception e) { return false; }
 		return true;
 	}
 	
