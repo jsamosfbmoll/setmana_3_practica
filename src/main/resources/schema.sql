@@ -1,3 +1,5 @@
+drop table if exists T_LLIBRES;
+
 create table T_LLIBRES (
    LLI_ISBN VARCHAR(100) PRIMARY KEY, 
    LLI_AUTOR VARCHAR(255),
