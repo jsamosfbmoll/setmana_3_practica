@@ -71,7 +71,8 @@ public class LlibreOpsBasic {
 	 * (Aquest metode no llanca excepcions!)
 	 */
 	public boolean existeix (String isbn) {
-		return false;
+		try { return em.contains(this.carrega(isbn)); }
+		catch (LlibreNoExisteixException e) { return false; }
 	}
 
 	/**
