@@ -1,6 +1,9 @@
 package org.formacio.setmana1.data;
 
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.formacio.setmana1.domini.Llibre;
 import org.formacio.setmana1.domini.Recomanacio;
 import org.springframework.stereotype.Repository;
@@ -13,11 +16,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class LlibreOpsBasic {
 	
+	@PersistenceContext
+	private EntityManager em;
+	
 	/**
 	 * Retorna el llibre amb l'ISBN indicat o, si no existeix, llança un LlibreNoExisteixException
 	 */
 	public Llibre carrega (String isbn) throws LlibreNoExisteixException {
-		return null;
+		Llibre libro = em.find(Llibre.class, isbn);
+		if (libro == null) throw new LlibreNoExisteixException();
+		return libro;
 	}
 	
 	/**
